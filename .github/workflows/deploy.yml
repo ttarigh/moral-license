@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # or master, depending on your default branch
+      - main
 
 jobs:
   deploy:
@@ -11,10 +11,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+        
+      - name: Create env.js
+        run: |
+          echo "const API_KEY = '${{ secrets.GEMINI_API_KEY }}';" > env.js
+          
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # The branch the action should deploy to
-          folder: .         # The folder the action should deploy
-          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub will automatically create this secret 
+          branch: gh-pages
+          folder: .
+          token: ${{ secrets.GITHUB_TOKEN }} 

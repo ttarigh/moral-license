@@ -1,6 +1,20 @@
-// Add API key check at the top of the file
-if (typeof API_KEY === 'undefined') {
-    throw new Error('API_KEY is not defined. Make sure env.js is loaded.');
+// Add more detailed error handling at the top of the file
+try {
+    if (typeof API_KEY === 'undefined') {
+        throw new Error('API_KEY is not defined. Make sure env.js is loaded.');
+    }
+    if (!API_KEY || API_KEY === 'undefined') {
+        throw new Error('API_KEY is empty or invalid');
+    }
+} catch (error) {
+    console.error('Configuration Error:', error);
+    document.body.innerHTML = `
+        <div style="text-align: center; padding: 2rem;">
+            <h1>Configuration Error</h1>
+            <p>${error.message}</p>
+            <p>Please check the deployment configuration.</p>
+        </div>`;
+    throw error;
 }
 
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';

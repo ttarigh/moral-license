@@ -17,19 +17,19 @@ jobs:
           echo "const API_KEY = '${{ secrets.GEMINI_API_KEY }}';" > env.js
           echo "Content of env.js:"
           cat env.js
+          
+      - name: Create _config.yml
+        run: |
+          echo "baseurl: /moral-license" > _config.yml
+          
+      - name: Verify files
+        run: |
           echo "Directory contents:"
           ls -la
-          
-      - name: Verify env.js is readable
-        run: |
-          if [ ! -f env.js ]; then
-            echo "env.js not found!"
-            exit 1
-          fi
-          if [ ! -r env.js ]; then
-            echo "env.js not readable!"
-            exit 1
-          fi
+          echo "env.js contents:"
+          cat env.js
+          echo "_config.yml contents:"
+          cat _config.yml
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

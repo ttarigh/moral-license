@@ -12,24 +12,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         
-      - name: Create env.js
+      - name: Inject API Key into HTML
         run: |
-          echo "const API_KEY = '${{ secrets.GEMINI_API_KEY }}';" > env.js
-          echo "Content of env.js:"
-          cat env.js
+          # Create a temporary file with the replacement
+          sed 's|<script src="env.js"></script>|<script>const API_KEY = "${{ secrets.GEMINI_API_KEY }}";</script>|g' index.html > temp.html
+          mv temp.html index.html
           
-      - name: Create _config.yml
-        run: |
-          echo "baseurl: /moral-license" > _config.yml
-          
-      - name: Verify files
+      - name: Verify injection
         run: |
           echo "Directory contents:"
           ls -la
-          echo "env.js contents:"
-          cat env.js
-          echo "_config.yml contents:"
-          cat _config.yml
+          echo "Checking if API_KEY placeholder exists in HTML:"
+          grep "API_KEY" index.html || echo "API_KEY not found in HTML"
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

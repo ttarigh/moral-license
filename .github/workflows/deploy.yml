@@ -15,10 +15,13 @@ jobs:
       - name: Create env.js
         run: |
           echo "const API_KEY = '${{ secrets.GEMINI_API_KEY }}';" > env.js
+          cat env.js # Debug: verify file contents
+          ls -la # Debug: verify file exists
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: .
+          clean: true # Automatically remove deleted files from the deployment
           token: ${{ secrets.GITHUB_TOKEN }} 

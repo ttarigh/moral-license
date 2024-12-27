@@ -1,5 +1,3 @@
-
-const API_KEY = process.env.GEMINI_API_KEY;
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // DOM Elements
@@ -35,11 +33,17 @@ async function generateLicense(action) {
             })
         });
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
+        if (data.error) {
+            throw new Error(data.error.message || 'API Error');
+        }
         return data.candidates[0].content.parts[0].text;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to generate license');
+        throw new Error('Failed to generate license: ' + error.message);
     }
 }
 

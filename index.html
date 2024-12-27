@@ -52,6 +52,13 @@
         </footer>
     </div>
     <script src="env.js"></script>
+    <script>
+        // Add error handling for API_KEY
+        if (typeof API_KEY === 'undefined') {
+            console.error('API_KEY not loaded');
+            document.body.innerHTML = '<div style="text-align: center; padding: 2rem;"><h1>Error</h1><p>Configuration error. Please try again later.</p></div>';
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

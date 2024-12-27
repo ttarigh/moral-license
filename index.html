@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral License Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Moral License Generator</h1>
+            <p class="subtitle">Justify your questionable decisions with philosophical flair</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <textarea id="action-input" placeholder="Enter your morally questionable action... (e.g., 'Launch a product I know is dangerous')"></textarea>
+                <button id="generate-btn">Generate License</button>
+            </div>
+
+            <div id="license-container" class="hidden">
+                <div id="license" class="license">
+                    <div class="license-header">
+                        <h2>MORAL LICENSE</h2>
+                        <div class="seal">✦</div>
+                    </div>
+                    <div class="license-content">
+                        <p id="license-text"></p>
+                    </div>
+                    <div class="license-footer">
+                        <div class="stamp">MORALLY APPROVED</div>
+                        <div class="date" id="license-date"></div>
+                    </div>
+                </div>
+                <div class="share-buttons">
+                    <button id="download-btn">Download License</button>
+                    <button id="share-btn">Share License</button>
+                </div>
+            </div>
+
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Generating your moral justification...</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>For entertainment purposes only. No actual moral absolution provided.</p>
+        </footer>
+    </div>
+    <script src="env.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

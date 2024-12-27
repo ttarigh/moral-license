@@ -1,3 +1,8 @@
+// Add API key check at the top of the file
+if (typeof API_KEY === 'undefined') {
+    throw new Error('API_KEY is not defined. Make sure env.js is loaded.');
+}
+
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // DOM Elements
@@ -12,6 +17,11 @@ const loadingElement = document.getElementById('loading');
 
 // Generate the moral license
 async function generateLicense(action) {
+    // Add another check inside the function
+    if (typeof API_KEY === 'undefined') {
+        throw new Error('API_KEY is not available');
+    }
+
     const prompt = `Generate a humorous, over-the-top "moral license" for the following action: "${action}". 
     The response should be written in a mock-formal style, using excessive philosophical jargon and tech buzzwords. 
     Include references to at least two of the following: ethical frameworks, Silicon Valley culture, startup mentality, or tech industry trends.

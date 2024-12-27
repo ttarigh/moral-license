@@ -15,13 +15,26 @@ jobs:
       - name: Create env.js
         run: |
           echo "const API_KEY = '${{ secrets.GEMINI_API_KEY }}';" > env.js
-          cat env.js # Debug: verify file contents
-          ls -la # Debug: verify file exists
+          echo "Content of env.js:"
+          cat env.js
+          echo "Directory contents:"
+          ls -la
+          
+      - name: Verify env.js is readable
+        run: |
+          if [ ! -f env.js ]; then
+            echo "env.js not found!"
+            exit 1
+          fi
+          if [ ! -r env.js ]; then
+            echo "env.js not readable!"
+            exit 1
+          fi
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: .
-          clean: true # Automatically remove deleted files from the deployment
+          clean: true
           token: ${{ secrets.GITHUB_TOKEN }} 

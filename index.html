@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doomers</title>
-    <base href="/moral-license/">
+    <!-- <base href="/moral-license/"> -->
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
@@ -62,8 +62,47 @@
         Site by <a href="https://tina.zone" target="_blank">Tina Tarighian</a>
     </div>
 
+    <div class="modal" id="ticketModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Select Your Show</h2>
+            <a href="https://www.eventbrite.com/e/doomers-manhattan-opening-tickets-1125438971259" class="ticket-option">
+                MANHATTAN OPENING 1/31–2/1
+            </a>
+            <a href="https://www.eventbrite.com/e/doomers-tickets-1136526915599" class="ticket-option">
+                BROOKLYN 2/11–2/22
+            </a>
+            <a href="https://www.eventbrite.com/e/doomers-tribeca-tickets-1141733498629" class="ticket-option">
+                TRIBECA 2/6
+            </a>
+        </div>
+    </div>
+
     <script>const API_KEY = "AIzaSyDcfEtFsWN5lzSzXTLik2MFhpcILpvbL_0";</script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script type="module" src="script.js"></script>
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('ticketModal');
+        const closeBtn = document.querySelector('.close-modal');
+        const ticketBtns = document.querySelectorAll('.ticket-btn');
+
+        ticketBtns.forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault();
+                modal.style.display = 'flex';
+            }
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

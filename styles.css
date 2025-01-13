@@ -436,3 +436,99 @@ button:hover {
 .loader.visible {
     display: block;
 }
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .rotating-text {
+        font-size: 2rem;
+        top: 15%;
+        width: 90%;
+        white-space: normal;
+    }
+
+    .start-button {
+        width: 80%;
+        font-size: 1rem;
+        padding: 12px 24px;
+        min-height: 45px;
+    }
+
+    .start-button.morphing {
+        width: 90%;
+        height: 180px;
+    }
+
+    .input-container {
+        width: 90%;
+        height: 180px;
+        padding: 1.5rem;
+    }
+
+    .license-container {
+        width: 90%;
+        height: auto;
+        max-width: 400px;
+    }
+
+    .license {
+        padding: 1rem;
+        height: 350px;
+    }
+
+    .license-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .license-content {
+        font-size: 1rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+        bottom: -120px;
+        gap: 0.5rem;
+    }
+
+    .download-btn, .ticket-btn {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 90%;
+        margin: 0.5rem;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+
+    textarea {
+        height: 80px;
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .close-button, .done-button {
+        font-size: 1.2rem;
+        padding: 0.4rem;
+    }
+}
+
+/* Small phones */
+@media screen and (max-width: 380px) {
+    .rotating-text {
+        font-size: 1.5rem;
+    }
+
+    .license-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .license-content {
+        font-size: 0.9rem;
+    }
+
+    .license {
+        height: 300px;
+    }
+}

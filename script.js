@@ -491,7 +491,8 @@ generateBtn.addEventListener('click', async () => {
 });
 
 // Add download functionality
-document.getElementById('download-btn').addEventListener('click', () => {
+document.getElementById('download-btn').textContent = 'Share License';
+document.getElementById('download-btn').addEventListener('click', async () => {
     const licenseElement = document.querySelector('.license');
     
     // Create a clone of the license for download
@@ -499,30 +500,53 @@ document.getElementById('download-btn').addEventListener('click', () => {
     clone.style.transform = 'none';
     clone.style.position = 'absolute';
     clone.style.left = '-9999px';
-    // Add fixed dimensions for the clone
-    clone.style.width = '720px';  // Match original width
-    clone.style.height = '420px'; // Match original height
+    clone.style.width = '720px';
+    clone.style.height = '420px';
     clone.style.padding = '1.5rem';
     document.body.appendChild(clone);
     
-    // Use html2canvas to capture the license
-    html2canvas(clone, {
-        backgroundColor: '#ffffff',
-        scale: 2, // Higher quality
-        width: 720,
-        height: 420,
-        windowWidth: 720,
-        windowHeight: 420
-    }).then(canvas => {
-        // Convert to image and download
-        const link = document.createElement('a');
-        link.download = 'moral-license.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        
-        // Clean up
+    try {
+        const canvas = await html2canvas(clone, {
+            backgroundColor: '#ffffff',
+            scale: 2,
+            width: 720,
+            height: 420,
+            windowWidth: 720,
+            windowHeight: 420
+        });
+
+        // Convert canvas to blob
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        const file = new File([blob], 'moral-license.png', { type: 'image/png' });
+
+        // Check if the native share API supports sharing files
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+                await navigator.share({
+                    files: [file],
+                    title: 'My Moral License',
+                    text: 'Check out my moral license from Doomers.fyi!'
+                });
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    // User cancelled the share operation
+                    return;
+                }
+                throw error;
+            }
+        } else {
+            // Fallback for browsers that don't support file sharing
+            const link = document.createElement('a');
+            link.download = 'moral-license.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    } catch (error) {
+        console.error('Error sharing:', error);
+        alert('Unable to share. Your browser may not support this feature.');
+    } finally {
         document.body.removeChild(clone);
-    });
+    }
 });
 
 // Move the event listener here and ensure it triggers the generate function

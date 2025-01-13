@@ -460,7 +460,7 @@ button:hover {
 @media screen and (max-width: 768px) {
     .rotating-text {
         font-size: 1.5rem;
-        top: 15%;
+        top: 8%;
         width: 50%;
         white-space: normal;
     }

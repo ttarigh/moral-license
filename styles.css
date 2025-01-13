@@ -23,7 +23,7 @@ body {
 
 .rotating-text {
     position: fixed;
-    top: 20%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     font-size: 3.5rem;
@@ -371,7 +371,8 @@ button:hover {
 .done-button {
     position: absolute;
     bottom: 1rem;
-    right: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.6);

@@ -465,7 +465,7 @@ button:hover {
     }
 
     .license-container {
-        width: 50%;
+        width: 100%;
         height: auto;
         max-width: 400px;
     }
@@ -498,7 +498,7 @@ button:hover {
         bottom: auto;
         width: 90%;
         margin: 0.5rem;
-        font-size: 0.9rem;
+        font-size: 0.5rem;
         padding: 0.6rem 1rem;
     }
 

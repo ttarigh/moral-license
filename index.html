@@ -6,60 +6,56 @@
     <title>Moral License Generator</title>
     <base href="/moral-license/">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.159.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.159.0/examples/jsm/"
+        }
+    }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Moral License Generator</h1>
-            <p class="subtitle">Justify your questionable decisions with philosophical flair</p>
-        </header>
-
-        <main>
-            <div class="input-section">
-                <textarea id="action-input" placeholder="Enter your morally questionable action... (e.g., 'Launch a product I know is dangerous')"></textarea>
-                <button id="generate-btn">Generate License</button>
-            </div>
-
-            <div id="license-container" class="hidden">
-                <div id="license" class="license">
-                    <div class="license-header">
-                        <h2>MORAL LICENSE</h2>
-                        <div class="seal">✦</div>
-                    </div>
-                    <div class="license-content">
-                        <p id="license-text"></p>
-                    </div>
-                    <div class="license-footer">
-                        <div class="stamp">MORALLY APPROVED</div>
-                        <div class="date" id="license-date"></div>
-                    </div>
-                </div>
-                <div class="share-buttons">
-                    <button id="download-btn">Download License</button>
-                    <button id="share-btn">Share License</button>
-                </div>
-            </div>
-
-            <div id="loading" class="hidden">
-                <div class="spinner"></div>
-                <p>Generating your moral justification...</p>
-            </div>
-        </main>
-
-        <footer>
-            <p>For entertainment purposes only. No actual moral absolution provided.</p>
-        </footer>
+    <div id="scene-container"></div>
+    
+    <div id="rotating-text" class="rotating-text"></div>
+    
+    <div id="input-container" class="input-container hidden">
+        <button class="close-button" id="close-btn">×</button>
+        <button class="done-button" id="generate-btn">✓</button>
+        <div class="input-section">
+            <textarea id="action-input" placeholder="Enter your morally questionable action..."></textarea>
+        </div>
+        <div id="loader" class="loader"></div>
     </div>
+
+    <div id="license-container" class="license-container hidden">
+        <div class="license">
+            <div class="license-id" id="license-id"></div>
+            <div class="license-header">
+                <h1>Moral License</h1>
+            </div>
+            <div class="license-content">
+                <p id="license-text"></p>
+            </div>
+            <div class="license-footer">
+                <div class="date" id="license-date"></div>
+            </div>
+            <div class="watermark">DOOMERS.FYI</div>
+        </div>
+        <div class="button-container">
+            <button class="download-btn" id="download-btn">Download License</button>
+            <button class="ticket-btn" onclick="window.open('https://google.com', '_blank')">Get Tickets to Doomers!</button>
+        </div>
+    </div>
+
+
+    <button id="start-btn" class="start-button">Get Your License</button>
+
     <script>const API_KEY = "AIzaSyDcfEtFsWN5lzSzXTLik2MFhpcILpvbL_0";</script>
-    <script>
-        // Add error handling for API_KEY
-        if (typeof API_KEY === 'undefined') {
-            console.error('API_KEY not loaded');
-            document.body.innerHTML = '<div style="text-align: center; padding: 2rem;"><h1>Error</h1><p>Configuration error. Please try again later.</p></div>';
-        }
-    </script>
-    <script src="script.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -389,7 +389,7 @@ button:hover {
 .done-button:hover {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.1);
-    transform: none;
+    transform: translateX(-50%);
 }
 
 #license-container.hidden {
